@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+
+{%block 'head' %}
+    <link rel="stylesheet" href="{% static 'general/equipamentos/css/equipamentos.css' %}">
+{% endblock%}
+
+{% block 'dashboard' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md card-dashboard">
+                 <p class="text-card"> Adicionar Equipamento </p>   
+            </div>   
+
+            <div class="col-md card-dashboard">
+                <p class="text-card"> Atualizar Equipamento </p> 
+            </div>    
+
+        </div>
+
+                <div class="adicionar-equipamento">
+            <form action="{%url 'equipamentos' %}" method="POST">{% csrf_token%}
+                    <div class="row">
+                        <div class="col-md">
+                            <p>Nome: </p>
+                            <input type="text" class="form-control" placeholder="Primeiro nome" name="nome" value="{{nome}}">
+                        </div>
+                        <div class="col-md">
+                            <p>Sobrenome:</p>
+                            <input type="text" class="form-control" placeholder="Sobrenome" name="sobrenome" value="{{sobrenome}}">
+                        </div>
+                    </div>
+                    <br>
+                    <p>E-mail:</p>
+                    <input type="email" class="form-control" placeholder="nome@sabesp.com.br" name="email" value="{{email}}">
+                    <br>
+                    <p>Telefone:</p>
+                    <input type="text" class="form-control" placeholder="__._____.____" name="Telefone" value="{{telefone}}">
+                    <hr style="background-color:gray;">
+                    <div class="add-equipamento">
+                        <h3>Equipamentos</h3>
+                        <span class="btn-add-equipamento" onclick="add_equipamento()">+ Adicionar Equipamento</span>
+                        #TODO: remover Equipamento
+                        <div id="form-equipamento">
+                            {% for equipamento, placa, ano in equipamento%}
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md">
+                                            <input type='text' placeholder='equipamento' class='form-control' name='equipamento' value="{{equipamento}}">
+                                        </div>
+
+                                        <div class="col-md">
+                                            <input type='text' placeholder='Placa' class='form-control' name='placa' value="{{placa}}">
+                                        </div>
+
+                                        <div class="col-md">
+                                            <input type='number' placeholder='ano' class='form-control' name='ano' value="{{ano}}">
+                                        </div>
+
+                                    </div>
+                    {% endfor%}
+                </div>
+
+            </div>
+
+            <br>
+            <input type="submit" value="Cadastrar" class="btn-principal">
+
+        </form>     
+
+
+
+    </div>        
+    <script src="{% static 'general/equipamentos/js/equipamentos.js' %}"></script>
+{% endblock %}
+
